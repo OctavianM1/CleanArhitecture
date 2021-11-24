@@ -41,9 +41,11 @@ pipeline {
              }
         }
         stage("Send email"){
+           steps{
             emailext body: 'Test Message',
                subject: 'Test Subject',
                to: 'octavian.mitu@amdaris.com'
+           }
         }
     }
     post {
