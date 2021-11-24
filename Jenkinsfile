@@ -3,6 +3,17 @@ pipeline {
     triggers {
         githubPush()
     }
+
+   parameters {
+      booleanParam(name: 'CLEAN_WORKSPACE', defaultValue: true, description: 'Clean workspace')
+      booleanParam(name: 'TESTING_FRONTEND', defaultValue: true, description: 'Testing frontend')
+   }
+
+   environment {
+      ON_SUCCESS_SEND_EMAIL = 'true'
+      ON_FAILURE_SEND_EMAIL = 'true'
+   }
+
     stages {
         stage('Restore packages'){
            steps{
@@ -27,10 +38,21 @@ pipeline {
         stage('Publish'){
              steps{
                bat 'dotnet publish src/WebUI/WebUI.csproj --configuration Release --no-restore'
-               emailext body: 'Test Message',
-                  subject: 'Test Subject',
-                  to: 'octavian.mitu@amdaris.com'
              }
+            emailext body: 'Test Message',
+               subject: 'Test Subject',
+               to: 'octavian.mitu@amdaris.com'
         }
+    }
+    post {
+      script {
+         if (CLEAN_WORKSPACE == 'true') {
+            echo 'Clean workspace'
+            cleanWs()
+         } else {
+            echo 'Workspace was not cleaned'
+         }
+         echo TESTING_FRONTEND
+      }
     }
 }
