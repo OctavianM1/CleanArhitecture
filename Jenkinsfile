@@ -27,6 +27,9 @@ pipeline {
         stage('Publish'){
              steps{
                bat 'dotnet publish src/WebUI/WebUI.csproj --configuration Release --no-restore'
+               emailext body: 'Test Message',
+                  subject: 'Test Subject',
+                  to: 'octavian.mitu@amdaris.com'
              }
         }
     }
