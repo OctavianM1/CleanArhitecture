@@ -21,7 +21,7 @@ pipeline {
          }
         stage('Test: Unit Test'){
            steps {
-                bat 'dotnet test CleanArchitecture.sln --configuration Release --no-restore --logger "LogFilePath=results.xml"'
+                bat 'dotnet test CleanArchitecture.sln --configuration Release --no-restore -l:trx;LogFileName=C:\temp\TestOutput.xm'
              }
           }
         stage('Publish'){
