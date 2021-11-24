@@ -44,7 +44,7 @@ pipeline {
            steps{
             emailext body: 'Test Message',
                subject: 'Test Subject',
-               to: 'octavian.mitu@amdaris.com'
+               to: 'octavian.mitu2000@gmail.com'
            }
         }
     }
