@@ -49,14 +49,16 @@ pipeline {
         }
     }
     post {
-      script {
-         if (CLEAN_WORKSPACE == 'true') {
-            echo 'Clean workspace'
-            cleanWs()
-         } else {
-            echo 'Workspace was not cleaned'
+      always {
+         script {
+            if (CLEAN_WORKSPACE == 'true') {
+               echo 'Clean workspace'
+               cleanWs()
+            } else {
+               echo 'Workspace was not cleaned'
+            }
+            echo TESTING_FRONTEND
          }
-         echo TESTING_FRONTEND
       }
     }
 }
