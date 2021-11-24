@@ -51,13 +51,13 @@ pipeline {
     post {
       always {
          script {
-            if (CLEAN_WORKSPACE == 'true') {
+            if (${params.CLEAN_WORKSPACE} == 'true') {
                echo 'Clean workspace'
                cleanWs()
             } else {
                echo 'Workspace was not cleaned'
             }
-            echo TESTING_FRONTEND
+            echo ${params.TESTING_FRONTEND}
          }
       }
     }
