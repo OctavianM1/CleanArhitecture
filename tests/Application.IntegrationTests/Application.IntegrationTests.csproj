@@ -21,6 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="JUnitTestLogger" Version="1.1.0" />
+        <PackageReference Include="JunitXml.TestLogger" Version="3.0.98" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
         <PackageReference Include="nunit" Version="3.13.2" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.1.0">

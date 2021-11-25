@@ -42,7 +42,7 @@ pipeline {
         }
         stage("Send email"){
            steps{
-            emailext body: 'Test Message',
+            emailext body: '${PROJECT_NAME} - Build # ${BUILD_NUMBER} - ${BUILD_STATUS}: Job - ${JOB_NAME} Check console output at ${BUILD_URL} to view the results',
                subject: 'Test Subject',
                to: 'octavian.mitu2000@gmail.com'
            }
