@@ -40,6 +40,11 @@ pipeline {
                bat 'dotnet publish src/WebUI/WebUI.csproj --configuration Release --no-restore'
              }
         }
+		stage('Test Frontend'){
+             steps{
+               echo "${params.TESTING_FRONTEND}"
+             }
+        }
         stage("Send email"){
            steps{
             emailext body: '${PROJECT_NAME} - Build # ${BUILD_NUMBER} - ${BUILD_STATUS}: Job - ${JOB_NAME} Check console output at ${BUILD_URL} to view the results',
@@ -57,7 +62,6 @@ pipeline {
             } else {
                echo 'Workspace was not cleaned'
             }
-            echo "${params.TESTING_FRONTEND}"
          }
       }
     }
