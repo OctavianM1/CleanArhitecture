@@ -11,9 +11,7 @@ public class ColourTests
     public void ShouldReturnCorrectColourCode()
     {
         var code = "#FFFFFF";
-
         var colour = Colour.From(code);
-
         colour.Code.Should().Be(code);
     }
 
@@ -21,7 +19,6 @@ public class ColourTests
     public void ToStringReturnsCode()
     {
         var colour = Colour.White;
-
         colour.ToString().Should().Be(colour.Code);
     }
 
@@ -29,7 +26,6 @@ public class ColourTests
     public void ShouldPerformImplicitConversionToColourCodeString()
     {
         string code = Colour.White;
-
         code.Should().Be("#FFFFFF");
     }
 
@@ -37,7 +33,6 @@ public class ColourTests
     public void ShouldPerformExplicitConversionGivenSupportedColourCode()
     {
         var colour = (Colour)"#FFFFFF";
-
         colour.Should().Be(Colour.White);
     }
 
