@@ -57,7 +57,7 @@ pipeline {
                      // img.push()
                      // bat "docker-compose build"
                      // bat "docker-compose start"
-                     bat "docker compose up"
+                     bat "docker compose up -d"
                   }
                }
             }
