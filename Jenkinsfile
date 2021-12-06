@@ -17,48 +17,44 @@ pipeline {
    }
 
     stages {
-      //   stage('Restore packages'){
-      //      steps{
-      //          bat 'dotnet restore CleanArchitecture.sln'
-      //       }
-      //    }
-      //   stage('Clean'){
-      //      steps{
-      //          bat 'dotnet clean CleanArchitecture.sln --configuration Release'
-      //       }
-      //    }
-      //   stage('Build'){
-      //      steps{
-      //          bat 'dotnet build CleanArchitecture.sln --configuration Release --no-restore'
-      //       }
-      //    }
-      //   stage('Test: Unit Test'){
-      //      steps {
-      //           bat 'dotnet test CleanArchitecture.sln --configuration Release --no-restore -l:trx;LogFileName="TestOutput.xml"'
-      //        }
-      //     }
-      //   stage('Publish'){
-      //        steps{
-      //          bat 'dotnet publish src/WebUI/WebUI.csproj --configuration Release --no-restore'
-      //        }
-      //   }
-		// stage('Test Frontend'){
-      //        steps{
-      //          echo "${params.TESTING_FRONTEND}"
-      //        }
-      //   }
+        stage('Restore packages'){
+           steps{
+               bat 'dotnet restore CleanArchitecture.sln'
+            }
+         }
+        stage('Clean'){
+           steps{
+               bat 'dotnet clean CleanArchitecture.sln --configuration Release'
+            }
+         }
+        stage('Build'){
+           steps{
+               bat 'dotnet build CleanArchitecture.sln --configuration Release --no-restore'
+            }
+         }
+        stage('Test: Unit Test'){
+           steps {
+                bat 'dotnet test CleanArchitecture.sln --configuration Release --no-restore -l:trx;LogFileName="TestOutput.xml"'
+             }
+          }
+        stage('Publish'){
+             steps{
+               bat 'dotnet publish src/WebUI/WebUI.csproj --configuration Release --no-restore'
+             }
+        }
+		stage('Test Frontend'){
+             steps{
+               echo "${params.TESTING_FRONTEND}"
+             }
+        }
       stage('Create Docker Image') {
          steps {
             script {
                node {
                      checkout scm
                      bat "docker login -u ${params.USERNAME} -p ${params.PASSWORD}"
-                     // def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
-                     // img.push()
-                     // bat "docker-compose build"
-                     // bat "docker-compose start"
-                     // bat "dotnet dev-certs https -ep %USERPROFILE%\\.aspnet\\https\\aspnetapp.pfx -p Your_password123"
-                     // bat "dotnet dev-certs https --trust"
+                     docker.build("octavianmitu/cleanarhitecture:${env.BUILD_NUMBER}").push()
+                     docker.build("octavianmitu/cleanarhitecture-frontend:${env.BUILD_NUMBER}").push()
                      bat "docker compose up"
                   }
                }
