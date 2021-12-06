@@ -60,9 +60,6 @@ pipeline {
                }
             }
          }
-      }
-
-    }
     post {
       always {
          script {
