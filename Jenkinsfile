@@ -56,8 +56,7 @@ pipeline {
                      // def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
                      // img.push()
 
-                     bat "docker-compose down --rmi all"
-                     bat "docker-compose up -d"
+                     bat "docker-compose up -d --build"
                   }
                }
             }
@@ -72,7 +71,7 @@ pipeline {
             } else {
                echo 'Workspace was not cleaned'
             }
-            bat "docker-compose down"
+            bat "docker-compose down --rmi all"
          }
       }
     }
