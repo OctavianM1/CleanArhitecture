@@ -35,21 +35,22 @@ pipeline {
                 bat 'dotnet test CleanArchitecture.sln --configuration Release --no-restore -l:trx;LogFileName="TestOutput.xml"'
              }
           }
-        stage('Publish'){
-             steps{
-               bat 'dotnet publish src/WebUI/WebUI.csproj --configuration Release --no-restore'
-             }
-        }
-		stage('Test Frontend'){
-             steps{
-               echo "${params.TESTING_FRONTEND}"
-             }
-        }
+      //   stage('Publish'){
+      //        steps{
+      //          bat 'dotnet publish src/WebUI/WebUI.csproj --configuration Release --no-restore'
+      //        }
+      //   }
+		// stage('Test Frontend'){
+      //        steps{
+      //          echo "${params.TESTING_FRONTEND}"
+      //        }
+      //   }
       stage('Create Docker Image') {
          steps {
             script {
                node {
-                  docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
+                  def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
+                  img.push()
                }
             }
          }
