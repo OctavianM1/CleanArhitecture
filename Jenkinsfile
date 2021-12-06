@@ -57,8 +57,8 @@ pipeline {
                      // img.push()
                      // bat "docker-compose build"
                      // bat "docker-compose start"
-                     bat "dotnet dev-certs https -ep %USERPROFILE%\\.aspnet\\https\\aspnetapp.pfx -p Your_password123"
-                     bat "dotnet dev-certs https --trust"
+                     // bat "dotnet dev-certs https -ep %USERPROFILE%\\.aspnet\\https\\aspnetapp.pfx -p Your_password123"
+                     // bat "dotnet dev-certs https --trust"
                      bat "docker compose up"
                   }
                }
