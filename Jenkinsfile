@@ -46,11 +46,12 @@ pipeline {
              }
         }
       stage('Create Docker Image') {
-         node {
-            docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
+         steps {
+            node {
+               docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
+            }
          }
       }
-
 
     }
     post {
