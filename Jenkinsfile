@@ -52,10 +52,12 @@ pipeline {
             script {
                node {
                   checkout scm
-                  docker.withRegistry('', 'docker-hub-credentials') {
-                     bat "docker login -u ${params.USERNAME} -p ${params.PASSWORD}"
-                     def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
-                     img.push()
+                  withCredentials([usernamePassword( credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                     docker.withRegistry('', 'docker-hub-credentials') {
+                        bat "docker login -u ${params.USERNAME} -p ${params.PASSWORD}"
+                        def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
+                        img.push()
+                     }
                   }
                }
             }
