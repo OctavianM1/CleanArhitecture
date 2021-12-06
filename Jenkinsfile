@@ -55,7 +55,7 @@ pipeline {
                      bat "docker login -u ${params.USERNAME} -p ${params.PASSWORD}"
                      docker.build("octavianmitu/cleanarhitecture:${env.BUILD_NUMBER}").push()
                      docker.build("octavianmitu/cleanarhitecture-frontend:${env.BUILD_NUMBER}").push()
-                     bat "docker compose up"
+                     bat "docker compose up -d"
                   }
                }
             }
