@@ -10,7 +10,7 @@ services:
       - "${DB_CONNECTION_STIRNG}"
       - "IdentityServer__Key__Type=${IdentityServer_Key_Type}"
       - "ASPNETCORE_Kestrel__Certificates__Default__Password=${DB_PASSWORD:-Your_password123}"
-      - "ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx"
+      - "ASPNETCORE_Kestrel__Certificates__Default__Path=$HOME/.aspnet/https/aspnetapp.pfx"
       - "ASPNETCORE_ENVIRONMENT=Development"
       - "SpaBaseUrl=http://clientapp:4200"
     volumes:
