@@ -7,6 +7,8 @@ pipeline {
    parameters {
       booleanParam(name: 'CLEAN_WORKSPACE', defaultValue: true, description: 'Clean workspace')
       booleanParam(name: 'TESTING_FRONTEND', defaultValue: true, description: 'Testing frontend')
+      string(name: 'USERNAME', defaultValue: '', description:'Docker username')
+      string(name: 'PASSWORD', defaultValue: '', description:'Docker password')
    }
 
    environment {
@@ -50,8 +52,11 @@ pipeline {
             script {
                node {
                   checkout scm
-                  def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
-                  img.push()
+                  docker.withRegistry('', 'docker-hub-credentials') {
+                     bat "docker login -u ${params.USERNAME} -p ${params.PASSWORD}"
+                     def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
+                     img.push()
+                  }
                }
             }
          }
