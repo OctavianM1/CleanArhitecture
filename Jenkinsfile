@@ -56,7 +56,7 @@ pipeline {
                      // def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
                      // img.push()
                      bat "docker-compose build"
-                     bat "docker-compose up -d"
+                     bat "docker-compose start"
                   }
                }
             }
