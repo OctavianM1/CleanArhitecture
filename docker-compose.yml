@@ -20,6 +20,15 @@ services:
       - db
     restart: on-failure
 
+  clientapp:
+    image: octavianmitu/cleanarhitecture-frontend
+    build:
+      context: src/WebUI/ClientApp
+      dockerfile: Dockerfile
+    depends_on:
+      - webui
+    restart: on-failure
+
   db:
     image: "mcr.microsoft.com/mssql/server"
     environment:
