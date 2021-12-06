@@ -45,6 +45,10 @@ pipeline {
                echo "${params.TESTING_FRONTEND}"
              }
         }
+      stage('Create Docker Image') {
+         docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
+      }
+
 
     }
     post {
