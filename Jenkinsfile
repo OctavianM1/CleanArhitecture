@@ -53,8 +53,8 @@ pipeline {
                node {
                      checkout scm
                      bat "docker login -u ${params.USERNAME} -p ${params.PASSWORD}"
-                     def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
-                     img.push()
+                     // def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
+                     // img.push()
                      bat "docker-compose up -d"
                   }
                }
