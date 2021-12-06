@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   webui:
-    image: octavianmitu/clean-arhitecture
+    image: octavianmitu/cleanarhitecture
     build:
       context: .
     environment:
@@ -11,6 +11,8 @@ services:
       - "IdentityServer__Key__Type=${IdentityServer_Key_Type}"
       - "ASPNETCORE_Kestrel__Certificates__Default__Password=${DB_PASSWORD:-Your_password123}"
       - "ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx"
+      - "ASPNETCORE_ENVIRONMENT=Development"
+      - "SpaBaseUrl=http://clientapp:4200"
     volumes:
       - ~/.aspnet/https:/https:ro
     ports:
@@ -24,7 +26,6 @@ services:
     image: octavianmitu/cleanarhitecture-frontend
     build:
       context: src/WebUI/ClientApp
-      dockerfile: Dockerfile
     depends_on:
       - webui
     restart: on-failure
@@ -34,3 +35,5 @@ services:
     environment:
       - "SA_PASSWORD=${DB_PASSWORD:-Your_password123}"
       - "ACCEPT_EULA=${DB_ACCEPT_EULA:-Y}"
+    ports:
+      - "1433:1433"

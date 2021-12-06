@@ -55,6 +55,8 @@ pipeline {
                      bat "docker login -u ${params.USERNAME} -p ${params.PASSWORD}"
                      // def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
                      // img.push()
+                     
+                     bat "docker-compose down"
                      bat "docker-compose up -d"
                   }
                }
