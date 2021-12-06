@@ -57,7 +57,7 @@ pipeline {
                      // img.push()
                      // bat "docker-compose build"
                      // bat "docker-compose start"
-                     bat "docker-compose up"
+                     bat "docker compose up"
                   }
                }
             }
@@ -72,7 +72,7 @@ pipeline {
             } else {
                echo 'Workspace was not cleaned'
             }
-            bat "docker-compose down"
+            bat "docker compose down"
          }
       }
     }
