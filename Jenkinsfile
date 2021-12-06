@@ -49,6 +49,7 @@ pipeline {
          steps {
             script {
                node {
+                  checkout scm
                   def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
                   img.push()
                }
