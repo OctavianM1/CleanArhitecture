@@ -16,7 +16,7 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
       - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
-      - ${HOMR}/.aspnet/https:/https/:ro
+      - ${HOME}/.aspnet/https:/https/:ro
     ports:
       - "5000:5000"
       - "5001:5001"
