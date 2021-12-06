@@ -55,8 +55,7 @@ pipeline {
                      bat "docker login -u ${params.USERNAME} -p ${params.PASSWORD}"
                      def img = docker.build("octavianmitu/clean-arhitecture:${env.BUILD_NUMBER}")
                      img.push()
-                     bat "docker-compose rm -f -s"
-                     bat "docker-compose up"
+                     bat "docker-compose up -d"
                   }
                }
             }
@@ -71,6 +70,7 @@ pipeline {
             } else {
                echo 'Workspace was not cleaned'
             }
+            bat "docker-compose down"
          }
       }
     }
